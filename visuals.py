@@ -29,6 +29,8 @@ def pca_results(good_data, pca, show_explained_variance=True, norm=None):
 
     # PCA components
     components = pd.DataFrame(np.round(pca.components_, 4), columns=good_data.keys())
+    if norm:
+        components = components.apply(lambda x: x / np.linalg.norm(x, norm), axis=1)
     components.index = dimensions
 
     # Create a bar plot visualization
